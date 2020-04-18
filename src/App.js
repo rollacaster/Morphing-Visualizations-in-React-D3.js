@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { pack, hierarchy } from 'd3-hierarchy'
+import { pack, hierarchy, tree } from 'd3-hierarchy'
 
 const data = {
   name: 'Animals',
@@ -25,6 +25,9 @@ const createPack = pack()
   .padding(20)
 const animalsPack = createPack(animalsHierarchy()).descendants()
 
+const createTree = tree().size([500, 480])
+const animalsTree = createTree(animalsHierarchy())
+
 function App() {
   return (
     <div style={{ paddingLeft: '2rem' }}>
@@ -40,6 +43,25 @@ function App() {
             stroke="black"
           />
         ))}
+        <g transform="translate(0, 10 )">
+          {animalsTree
+            .links()
+            .map(
+              ({ source: { x: x1, y: y1 }, target: { x: x2, y: y2 } }, i) => (
+                <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" />
+              )
+            )}
+          {animalsTree.descendants().map(({ x, y, data: { name } }) => (
+            <circle
+              key={name}
+              cx={x}
+              cy={y}
+              r={10}
+              fill="transparent"
+              stroke="black"
+            />
+          ))}
+        </g>
       </svg>
     </div>
   )
