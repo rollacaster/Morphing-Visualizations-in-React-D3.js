@@ -43,6 +43,21 @@ function App() {
       <button onClick={() => setToggle(!toggle)}>Morph</button>
       <svg width="500" height="500">
         <g transform="translate(0, 10 )">
+          {animalsTree
+            .links()
+            .map(
+              ({ source: { x: x1, y: y1 }, target: { x: x2, y: y2 } }, i) => (
+                <line
+                  key={i}
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
+                  stroke="black"
+                  style={{ opacity: toggle ? 1 : 0, transition: 'opacity 1s' }}
+                />
+              )
+            )}
           {prepareData().map(
             ({
               treeItem: {
