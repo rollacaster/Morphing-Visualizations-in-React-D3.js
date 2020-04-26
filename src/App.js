@@ -21,7 +21,7 @@ const data = {
 
 const animalsHierarchy = () => hierarchy(data).sum(() => 1)
 const createPack = pack()
-  .size([500, 500])
+  .size([500, 490])
   .padding(20)
 const animalsPack = createPack(animalsHierarchy()).descendants()
 
@@ -34,6 +34,10 @@ const prepareData = () => {
     treeItem: animalsTree.descendants()[i]
   }))
 }
+
+console.log(prepareData())
+
+const colors = ['#F2B950', '#F29441', '#D9753B', '#D9501E']
 
 function App() {
   const [toggle, setToggle] = useState(true)
@@ -63,7 +67,8 @@ function App() {
               treeItem: {
                 x,
                 y,
-                data: { name }
+                data: { name },
+                depth
               },
               packItem: { x: cx, y: cy, r }
             }) => (
@@ -73,8 +78,7 @@ function App() {
                 cx={toggle ? x : cx}
                 cy={toggle ? y : cy}
                 r={toggle ? 10 : r}
-                fill="transparent"
-                stroke="black"
+                fill={colors[depth]}
               />
             )
           )}
