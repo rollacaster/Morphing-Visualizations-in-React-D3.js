@@ -2,7 +2,7 @@
 
 Learn how to create a visualization which is able to morph between a pack visualization and a tree using React and D3.js 
 
-[![img](/assets/morphing.gif)](file:///assets/morphing.gif)
+<img src="assets/morphing.gif" width="400" />
 
 
 ## Lessons 🎥

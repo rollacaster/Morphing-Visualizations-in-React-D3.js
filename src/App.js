@@ -21,11 +21,11 @@ const data = {
 
 const animalsHierarchy = () => hierarchy(data).sum(() => 1)
 const createPack = pack()
-  .size([500, 490])
+  .size([500, 480])
   .padding(20)
 const animalsPack = createPack(animalsHierarchy()).descendants()
 
-const createTree = tree().size([500, 480])
+const createTree = tree().size([500, 470])
 const animalsTree = createTree(animalsHierarchy())
 
 const prepareData = () => {
@@ -52,6 +52,11 @@ function App() {
       <h1>Morphing Viz with D3.js & React</h1>
       <button onClick={() => setToggle(!toggle)}>Morph</button>
       <svg width="500" height="500">
+        <defs>
+          <filter id="shadow">
+            <feDropShadow dx="1.2" dy="1.4" stdDeviation="1.2" />
+          </filter>
+        </defs>
         <g transform="translate(0, 10 )">
           {animalsTree
             .links()
@@ -84,7 +89,7 @@ function App() {
               packItem: { x: cx, y: cy, r }
             }) => (
               <circle
-                style={{ transition: 'all 3s' }}
+                style={{ transition: 'all 3s', filter: 'url(#shadow)' }}
                 key={name}
                 cx={toggle ? x : cx}
                 cy={toggle ? y : cy}
