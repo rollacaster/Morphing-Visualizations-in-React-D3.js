@@ -39,6 +39,12 @@ console.log(prepareData())
 
 const colors = ['#F2B950', '#F29441', '#D9753B', '#D9501E']
 
+const lineLength = (x1, y1, x2, y2) => {
+  const a = y1 - y2
+  const b = x1 - x2
+  return Math.sqrt(a ** 2 + b ** 2)
+}
+
 function App() {
   const [toggle, setToggle] = useState(true)
   return (
@@ -57,8 +63,13 @@ function App() {
                   y1={y1}
                   x2={x2}
                   y2={y2}
-                  stroke="black"
-                  style={{ opacity: toggle ? 1 : 0, transition: 'opacity 1s' }}
+                  stroke="darkgray"
+                  style={{
+                    opacity: toggle ? 1 : 0,
+                    transition: 'all 2s',
+                    strokeDasharray: lineLength(x1, y1, x2, y2),
+                    strokeDashoffset: toggle ? 0 : lineLength(x1, y1, x2, y2)
+                  }}
                 />
               )
             )}
